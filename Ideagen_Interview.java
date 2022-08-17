@@ -1,17 +1,16 @@
 public class Ideagen_Interview {
+
     public static void main(String[] args) {
-        // System.out.println(calculate("1 + 1")); //Answer: 2
-        // System.out.println(calculate("2 * 2")); //Answer: 4
-        // System.out.println(calculate("1 + 2 + 3")); //Answer: 6
-        // System.out.println(calculate("6 / 2")); //Answer: 3
-        // System.out.println(calculate("11 + 23")); //Answer: 34
-        // System.out.println(calculate("11.1 + 23")); //Answer: 34.1 
-        // System.out.println(calculate("1 + 1 * 3")); // Answer: 4 
+        System.out.println(calculate("1 + 1")); //Answer: 2
+        System.out.println(calculate("2 * 2")); //Answer: 4
+        System.out.println(calculate("1 + 2 + 3")); //Answer: 6
+        System.out.println(calculate("6 / 2")); //Answer: 3
+        System.out.println(calculate("11 + 23")); //Answer: 34
+        System.out.println(calculate("11.1 + 23")); //Answer: 34.1
+        System.out.println(calculate("1 + 1 * 3")); // Answer: 4
 
-        // System.out.println(calculate("( 11.5 + 15.4 ) + 10.1")); //Answer: 37 //need fix, cannot trigger - attempted
-        // System.out.println(calculate("23 - ( 29.3 - 12.5 )")); //Answer: 6.2 //need fix, cannot trigger - attempted
-
-        // System.out.println(calculate("( 1 + 1 )"));
+        // System.out.println(calculate("( 11.5 + 15.4 ) + 10.1")); // Answer: 37 //need fix - attempted
+        // System.out.println(calculate("23 - ( 29.3 - 12.5 )")); //Answer: 6.2 //need fix - attempted
     }
 
     public static double calculate(String sum) {
@@ -19,7 +18,9 @@ public class Ideagen_Interview {
 
         String operator1 = "";
         String operator2 = "";
-        String operator3 = "";
+
+        String operatorBracket1 = "";
+        String operatorBracket2 = "";
 
         double num1 = 0;
         double num2 = 0;
@@ -32,13 +33,13 @@ public class Ideagen_Interview {
         // String[] arrNumSplit = removedWhiteSpace.split("[-+*/]");
         String[] arrNumSplit = removedWhiteSpace.split("[()-+*/]");
 
-        System.out.println("Check length of arrNumSplit:: " + arrNumSplit.length);
+        // System.out.println("Check length of arrNumSplit:: " + arrNumSplit.length);
 
         for (String item : arrNumSplit) {
-            System.out.println("Check arrNumSplit item:: " + item);
+            System.out.println("\nCheck arrNumSplit item:: " + item);
 
             if (item.equals("")) {
-                System.out.println("\nFirst index is empty.");
+                System.out.println("NUMBER Index is empty.");
             } else {
                 if (num1 == 0 && num2 == 0 && num3 == 0) {
                     num1 = Double.parseDouble(item);
@@ -48,33 +49,46 @@ public class Ideagen_Interview {
                     num3 = Double.parseDouble(item);
                 }
             }
-
-            
         }
 
-        //For operator split
+        System.out.println("\nDEBUG num1-- :: " + num1);
+        System.out.println("DEBUG num2-- :: " + num2);
+        System.out.println("DEBUG num3-- :: " + num3);
+
+        // For operator split
         // String[] arrOperatorSplit = removedWhiteSpace.split("[0-9.]");
         String[] arrOperatorSplit = removedWhiteSpace.split("[\\d.]");
 
-        System.out.println("Check arrOperatorSplit length::" + arrNumSplit.length);
+        // System.out.println("Check arrOperatorSplit length::" + arrNumSplit.length);
 
         for (String item : arrOperatorSplit) {
             System.out.println("\nCheck arrOperatorSplit item:: " + item);
 
-            if (operator1.equals("") & operator2.equals("") && operator3.equals("")) {
-                operator1 = item.toString();
-
-                System.out.println("Operator1 inserted:: " + operator1);
-            } else if (!operator1.equals("") & operator2.equals("") && operator3.equals("")) {
-                operator2 = item.toString();
-
-                System.out.println("Operator2 inserted:: " + operator2);
+            if (item.equals("")) {
+                System.out.println("OPERATOR Index is empty.");
             } else {
-                operator3 = item.toString();
 
-                System.out.println("Operator3 inserted:: " + operator3);
+                if (operator1.equals("") & operator2.equals("")) {
+                    if (item.toString() == "(") {
+                        operatorBracket1 = item.toString();
+                    } else {
+                        operator1 = item.toString();
+    
+                        System.out.println("Operator1 inserted:: " + operator1);
+                    }
+    
+                } else if (!operator1.equals("") & operator2.equals("")) {
+                    if (item.toString() == ")") {
+                        operatorBracket2 = item.toString();
+                    } else {
+                        operator2 = item.toString();
+    
+                        System.out.println("Operator2 inserted:: " + operator2);
+                    }
+    
+                } 
             }
-        }
+        } //end of arrOperatorSplit
 
         if (operator2.equals("*") || operator2.equals("/")) {
             switch (operator2) {
@@ -114,7 +128,7 @@ public class Ideagen_Interview {
             System.out.println("\nOperator2 is either + - or none");
 
             // if detect 1 operator
-            if (!operator1.isEmpty() && operator2.isEmpty() && operator3.isEmpty()) {
+            if (!operator1.isEmpty() && operator2.isEmpty()) {
 
                 switch (operator1) {
                     case "+":
@@ -137,7 +151,7 @@ public class Ideagen_Interview {
             }
 
             // if detect 2 operator
-            if (!operator1.isEmpty() && !operator2.isEmpty() && operator3.isEmpty()) {
+            if (!operator1.isEmpty() && !operator2.isEmpty()) {
                 switch (operator1) {
                     case "+":
                         total = num1 + num2;
