@@ -1,16 +1,33 @@
+/*
+ * Author: Dana
+ * Purpose: For Ideagen Java Remote Code Testing
+ */
+
+/*
+ * Summary:
+ * Questions 1 - 7 for Part 1 have been answered.
+ * 
+ * Question 1 -2 for Part 2 have been attempted but unable to resolve logic error regarding the arthimetic brackets within
+ * 
+ * Extra question not attempted
+*/
+
 public class Ideagen_Interview {
 
     public static void main(String[] args) {
-        System.out.println(calculate("1 + 1")); //Answer: 2
-        System.out.println(calculate("2 * 2")); //Answer: 4
-        System.out.println(calculate("1 + 2 + 3")); //Answer: 6
-        System.out.println(calculate("6 / 2")); //Answer: 3
-        System.out.println(calculate("11 + 23")); //Answer: 34
-        System.out.println(calculate("11.1 + 23")); //Answer: 34.1
+        System.out.println(calculate("1 + 1")); // Answer: 2
+        System.out.println(calculate("2 * 2")); // Answer: 4
+        System.out.println(calculate("1 + 2 + 3")); // Answer: 6
+        System.out.println(calculate("6 / 2")); // Answer: 3
+        System.out.println(calculate("11 + 23")); // Answer: 34
+        System.out.println(calculate("11.1 + 23")); // Answer: 34.1
         System.out.println(calculate("1 + 1 * 3")); // Answer: 4
 
-        // System.out.println(calculate("( 11.5 + 15.4 ) + 10.1")); // Answer: 37 //need fix - attempted
-        // System.out.println(calculate("23 - ( 29.3 - 12.5 )")); //Answer: 6.2 //need fix - attempted
+        // System.out.println(calculate("( 11.5 + 15.4 ) + 10.1")); // Answer: 37 //need
+        // fix - attempted
+        // System.out.println(calculate("23 - ( 29.3 - 12.5 )")); //Answer: 6.2 //need
+        // fix - attempted
+
     }
 
     public static double calculate(String sum) {
@@ -73,22 +90,22 @@ public class Ideagen_Interview {
                         operatorBracket1 = item.toString();
                     } else {
                         operator1 = item.toString();
-    
+
                         System.out.println("Operator1 inserted:: " + operator1);
                     }
-    
+
                 } else if (!operator1.equals("") & operator2.equals("")) {
                     if (item.toString() == ")") {
                         operatorBracket2 = item.toString();
                     } else {
                         operator2 = item.toString();
-    
+
                         System.out.println("Operator2 inserted:: " + operator2);
                     }
-    
-                } 
+
+                }
             }
-        } //end of arrOperatorSplit
+        } // end of arrOperatorSplit
 
         if (operator2.equals("*") || operator2.equals("/")) {
             switch (operator2) {
