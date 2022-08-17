@@ -5,11 +5,13 @@ public class Ideagen_Interview {
         // System.out.println(calculate("1 + 2 + 3")); //Answer: 6
         // System.out.println(calculate("6 / 2")); //Answer: 3
         // System.out.println(calculate("11 + 23")); //Answer: 34
-        // System.out.println(calculate("11.1 + 23")); //Answer: 34.1
+        // System.out.println(calculate("11.1 + 23")); //Answer: 34.1 
         // System.out.println(calculate("1 + 1 * 3")); // Answer: 4 
 
         // System.out.println(calculate("( 11.5 + 15.4 ) + 10.1")); //Answer: 37 //need fix, cannot trigger - attempted
         // System.out.println(calculate("23 - ( 29.3 - 12.5 )")); //Answer: 6.2 //need fix, cannot trigger - attempted
+
+        // System.out.println(calculate("( 1 + 1 )"));
     }
 
     public static double calculate(String sum) {
@@ -27,25 +29,37 @@ public class Ideagen_Interview {
         String removedWhiteSpace = sum.replaceAll(" ", "");
 
         // For numbers split
-        String[] arrNumSplit = removedWhiteSpace.split("[-+*/]");
+        // String[] arrNumSplit = removedWhiteSpace.split("[-+*/]");
+        String[] arrNumSplit = removedWhiteSpace.split("[()-+*/]");
+
+        System.out.println("Check length of arrNumSplit:: " + arrNumSplit.length);
 
         for (String item : arrNumSplit) {
-            System.out.println("Check arrNumSplit:: " + item);
+            System.out.println("Check arrNumSplit item:: " + item);
 
-            if (num1 == 0 && num2 == 0 && num3 == 0) {
-                num1 = Double.parseDouble(item);
-            } else if (num1 != 0 && num2 == 0 && num3 == 0) {
-                num2 = Double.parseDouble(item);
+            if (item.equals("")) {
+                System.out.println("\nFirst index is empty.");
             } else {
-                num3 = Double.parseDouble(item);
+                if (num1 == 0 && num2 == 0 && num3 == 0) {
+                    num1 = Double.parseDouble(item);
+                } else if (num1 != 0 && num2 == 0 && num3 == 0) {
+                    num2 = Double.parseDouble(item);
+                } else {
+                    num3 = Double.parseDouble(item);
+                }
             }
+
+            
         }
 
         //For operator split
-        String[] arrOperatorSplit = removedWhiteSpace.split("[0-9.]");
+        // String[] arrOperatorSplit = removedWhiteSpace.split("[0-9.]");
+        String[] arrOperatorSplit = removedWhiteSpace.split("[\\d.]");
+
+        System.out.println("Check arrOperatorSplit length::" + arrNumSplit.length);
 
         for (String item : arrOperatorSplit) {
-            System.out.println("Check arrOperatorSplit:: " + item);
+            System.out.println("\nCheck arrOperatorSplit item:: " + item);
 
             if (operator1.equals("") & operator2.equals("") && operator3.equals("")) {
                 operator1 = item.toString();
